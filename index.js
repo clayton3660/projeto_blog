@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
+const categoriesController = require('./categories/CategoriesController'); //importando rotas arquivo controller
+const articlesController = require('./articles/ArticlesController'); //importando rotas arquivo controller
 
 //configurando view engine
 app.set('view engine', 'ejs');
@@ -24,6 +26,9 @@ connection // -> objeto de conexão importado acima
     //mensagem se não conseguiu realizar a conexão
     console.log(error, 'Falha ao se conectar com o banco de dados');
   });
+
+app.use('/', categoriesController); // -> utilizar as rotas que estão dentro do arquivo controllers
+app.use('/', articlesController); // -> utilizar as rotas que estão dentro do arquivo controllers
 
 app.get('/', (req, res) => {
   res.render('index');
