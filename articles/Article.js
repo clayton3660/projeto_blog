@@ -1,19 +1,25 @@
 const Sequelize = require('sequelize');
-const connections = require('../database/database');
+const connection = require('../database/database');
+const Category = require('../categories/Category');
 
 const Article = connection.define('articles', {
   title: {
-    type: sequelize.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   slug: {
-    sequelize: STRING,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   body: {
-    type: sequelize.TEXT,
+    type: Sequelize.TEXT,
     allowNull: false,
   },
 });
+//relacionamentos
 
-module.exports = Article;
+Category.hasMany(Article); // um para muitos
+Article.belongsTo(Category); // um para um
+
+//Article.sync({ force: true }); // sincronizar banco de dados, precisa ser feito em todos os arquivos relacionados
+// após sincronizar com o banco, remover a linha Article.sync({ force: true }); dos arquivos relacionados

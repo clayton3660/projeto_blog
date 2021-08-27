@@ -1,15 +1,17 @@
 const Sequelize = require('sequelize');
-const connections = require('../database/database');
+const connection = require('../database/database');
 
 const Category = connection.define('categories', {
   title: {
-    type: sequelize.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   slug: {
-    sequelize: STRING,
+    type: Sequelize.STRING,
     allowNull: false,
   },
 });
+
+//Category.sync({ force: true }); // sincronizando no banco de dados o relacionamento
 
 module.exports = Category;
