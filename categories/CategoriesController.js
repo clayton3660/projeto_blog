@@ -15,7 +15,7 @@ router.post('/categories/save', (req, res) => {
       title: title,
       slug: slugify(title), // utilizado para colocar tudo em minusculo e remover os espaços
     }).then(() => {
-      res.redirect('/');
+      res.redirect('/admin/categories');
     });
   } else {
     res.redirect('/admin/categories/new');
@@ -41,6 +41,22 @@ router.post('/categories/delete', (req, res) => {
   }else {// null
     res.redirect('/admin/categories')
   }
+})
+router.get('/admin/categories/edit/:id', (req, res) => {
+  var id = req.params.id
+  if(isNaN(id)){
+    res.redirect('/admin/categories')
+  }
+  Category.findByPk(id).then(category => {
+    if(category != undefined) {
+      console.log(category)
+      res.render('admin/categories/edit', {category: category})
+    }else {
+      res.redirect('/admin/categories') //para o res.render não colocar o '/' no inicio do endereco, apenas o redirect que contem o '/' no inicio
+    }
+  }).catch(erro => {
+    res.redirect('/admin/categories')
+  })
 })
 
 module.exports = router;
