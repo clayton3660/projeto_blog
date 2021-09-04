@@ -19,12 +19,12 @@ router.post('/categories/save', (req, res) => {
     });
   } else {
     res.redirect('/admin/categories/new');
-  } 
+  }
 });
-
-
 router.get('/admin/categories', (req, res) => {
-  res.render('admin/categories/index')
-})
+  Category.findAll().then((categories) => {
+    res.render('admin/categories/index', { categories: categories });
+  });
+});
 
 module.exports = router;
