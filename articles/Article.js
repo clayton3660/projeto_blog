@@ -23,3 +23,4 @@ Article.belongsTo(Category); // um para um
 
 //Article.sync({ force: true }); // sincronizar banco de dados, precisa ser feito em todos os arquivos relacionados
 // após sincronizar com o banco, remover a linha Article.sync({ force: true }); dos arquivos relacionados
+module.exports = Article;
