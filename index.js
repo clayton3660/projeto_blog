@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 connection // -> objeto de conexão importado acima
   .authenticate() // aqui autentica com as informações do arquivo database.js
   .then(() => {
-    console.log('Conecatdo com o banco!'); // mensagem se realizou a conexão
+    console.log('Conectado com o banco!'); // mensagem se realizou a conexão
   })
   .catch((error) => {
     //mensagem se não conseguiu realizar a conexão
@@ -35,7 +35,10 @@ app.use('/', categoriesController); // -> utilizar as rotas que estão dentro do
 app.use('/', articlesController); // -> utilizar as rotas que estão dentro do arquivo controllers
 
 app.get('/', (req, res) => {
-  res.render('index');
+  Article.findAll().then(articles => {
+    res.render('index', {articles: articles});
+
+  })
 });
 
 app.listen(8080, () => {
