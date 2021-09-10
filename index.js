@@ -36,11 +36,11 @@ app.use('/', articlesController); // -> utilizar as rotas que estão dentro do a
 
 app.get('/', (req, res) => {
   Article.findAll({
-    order: [
-      ['id','DESC']
-    ]
+    order: [['id', 'DESC']],
   }).then((articles) => {
-    res.render('index', { articles: articles });
+    Category.findAll().then((categories) => {
+      res.render('index', { articles: articles, categories: categories });
+    });
   });
 });
 app.get('/:slug', (req, res) => {
@@ -49,15 +49,19 @@ app.get('/:slug', (req, res) => {
     where: {
       slug: slug,
     },
-  }).then((article) => {
-    if (article != undefined) {
-      res.render('article', {article:article});
-    } else {
-      res.redirect('/');
-    }
-  }).catch (err => {
-    res.redirect('/');
   })
+    .then((article) => {
+      if (article != undefined) {
+        Category.findAll().then((categories) => {
+          res.render('article', { article: article, categories: categories });
+        });
+      } else {
+        res.redirect('/');
+      }
+    })
+    .catch((err) => {
+      res.redirect('/');
+    });
 });
 
 app.listen(8080, () => {
