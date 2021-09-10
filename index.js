@@ -35,7 +35,11 @@ app.use('/', categoriesController); // -> utilizar as rotas que estão dentro do
 app.use('/', articlesController); // -> utilizar as rotas que estão dentro do arquivo controllers
 
 app.get('/', (req, res) => {
-  Article.findAll().then((articles) => {
+  Article.findAll({
+    order: [
+      ['id','DESC']
+    ]
+  }).then((articles) => {
     res.render('index', { articles: articles });
   });
 });
