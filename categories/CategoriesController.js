@@ -49,7 +49,6 @@ router.get('/admin/categories/edit/:id', (req, res) => {
   }
   Category.findByPk(id).then(category => {
     if(category != undefined) {
-      console.log(category)
       res.render('admin/categories/edit', {category: category})
     }else {
       res.redirect('/admin/categories') //para o res.render não colocar o '/' no inicio do endereco, apenas o redirect que contem o '/' no inicio
@@ -58,6 +57,8 @@ router.get('/admin/categories/edit/:id', (req, res) => {
     res.redirect('/admin/categories')
   })
 })
+
+
 router.post('/categories/update', (req, res) => {
   var id = req.body.id
   var title = req.body.title
