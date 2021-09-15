@@ -26,7 +26,11 @@
         <label>Categoria</label>
         <select name="category" class="form-control" id="">
           <% categories.forEach((category) => { %>
-          <option value="<%= category.id%>"><%=category.title%></option>
+            <%if(category.id == article.id) {%>
+              <option value="<%= category.id%>" selected><%=category.title%></option>
+            <%}else { %>
+              <option value="<%= category.id%>"><%=category.title%></option>
+              <%}%>
           <% }) %></select
         ><br />
         <button type="submit" class="btn btn-success">Atualizar</button>
@@ -52,7 +56,5 @@
         tinymce.get('article').setContent($('#content').html());
       },
     });
-    var di = content.textContent;
-    console.log(di)
   </script>
 </div>
