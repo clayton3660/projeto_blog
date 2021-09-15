@@ -8,7 +8,8 @@
       <h2>Editar artigo</h2>
     </div>
     <div class="card-body">
-      <form method="POST" action="/articles/save">
+      <form method="POST" action="/articles/update">
+        <input type="hidden" value="<%= article.id%>" name="id"/>
         <input
           class="form-control"
           type="text"
@@ -24,9 +25,9 @@
         ></textarea
         ><br />
         <label>Categoria</label>
-        <select name="category" class="form-control" id="">
+        <select name="category" class="form-control">
           <% categories.forEach((category) => { %>
-            <%if(category.id == article.id) {%>
+            <%if(category.id == article.categoryId) {%>
               <option value="<%= category.id%>" selected><%=category.title%></option>
             <%}else { %>
               <option value="<%= category.id%>"><%=category.title%></option>
@@ -38,7 +39,7 @@
     </div>
   </div>
 </div>
-<div id="content" style="display: none"><%= article.body%></div>
+<div id="content" style="display: none"><%- article.body%></div>
 <!-- verificar a passagem da função article:article, senao não ira funcionar a invocação aqui -->
 <div>
   <%- include ("../../partials/footer.ejs") %>
