@@ -92,17 +92,20 @@ router.post('/articles/update', (req, res) => {
     });
 });
 
-router.get('/article/page/:num', (req, res) => {
+router.get('/articles/page/:num', (req, res) => {
   var page = req.params.num;
   var offset = 0;
   if (isNaN(page) || page == 1) {
     offset = 0;
   } else {
-    offset = parseInt(page) * 2; //precisei mudar para *2 para que funcionasse corretamente
+    offset = parseInt(page) * 4; //precisei mudar para *2 para que funcionasse corretamente
   }
   Article.findAndCountAll({
     limit: 4,
     offset: offset,
+    order: [
+      ['id', 'DESC']
+    ],
   }).then((articles) => {
     var next;
     if (offset + 4 >= articles.count) {

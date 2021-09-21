@@ -37,6 +37,7 @@ app.use('/', articlesController); // -> utilizar as rotas que estão dentro do a
 app.get('/', (req, res) => {
   Article.findAll({
     order: [['id', 'DESC']],
+    limit: 4
   }).then((articles) => {
     Category.findAll().then((categories) => {
       res.render('index', { articles: articles, categories: categories });
