@@ -5,9 +5,11 @@ const connection = require('./database/database');
 
 const categoriesController = require('./categories/CategoriesController'); //importando rotas arquivo controller
 const articlesController = require('./articles/ArticlesController'); //importando rotas arquivo controller
+const usersController = require('./users/UsersController'); //importando rotas arquivo controller
 
 const Article = require('./articles/Article');
 const Category = require('./categories/Category');
+const User = require('./users/User'); // importando arquivo para sincronizar o banco de dados
 
 //configurando view engine
 app.set('view engine', 'ejs');
@@ -33,6 +35,7 @@ connection // -> objeto de conexão importado acima
 
 app.use('/', categoriesController); // -> utilizar as rotas que estão dentro do arquivo controllers
 app.use('/', articlesController); // -> utilizar as rotas que estão dentro do arquivo controllers
+app.use('/', usersController); // -> utilizar as rotas que estão dentro do arquivo controllers
 
 app.get('/', (req, res) => {
   Article.findAll({
