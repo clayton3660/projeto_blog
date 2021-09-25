@@ -10,4 +10,11 @@ router.get('/admin/users/create', (req, res) => {
   res.render('admin/users/create');
 });
 
+router.post("/users/create", (req, res) => {
+  var email = req.body.email;
+  var password = req.body.password;
+
+  res.json({email, password}); // testando para saber se os dados estão chegando corretamnete.
+})
+
 module.exports = router;
