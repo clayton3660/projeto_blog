@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 //sessions
 
 app.use(session({
-  secret: 'qualquercoisa', cookie: {maxAge: 30000 }
+  secret: 'qualquercoisa', cookie: {maxAge: 3000000 }
 }))
 
 
@@ -44,6 +44,28 @@ connection // -> objeto de conexão importado acima
 app.use('/', categoriesController); // -> utilizar as rotas que estão dentro do arquivo controllers
 app.use('/', articlesController); // -> utilizar as rotas que estão dentro do arquivo controllers
 app.use('/', usersController); // -> utilizar as rotas que estão dentro do arquivo controllers
+
+
+// app.get('/session', (req, res) => {
+//   req.session.treinamento = "Formação NOde.js"
+//   req.session.ano = 2019
+//   req.session.email = "email@email.com"
+//   req.session.user = {
+//     username: "Claytonsilva",
+//     email: "email@claytonsilva.com",
+//     id:10
+//   }
+//   res.send("Sessão gerada!")
+// })
+
+// app.get('/read', (req, res) => {
+//   res.json({
+//     trenamento: req.session.trenamento,
+//     ano: req.session.ano,
+//     email: req.session.email,
+//     user: req.session.user
+//   })
+// })
 
 app.get('/', (req, res) => {
   Article.findAll({
