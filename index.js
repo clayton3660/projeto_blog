@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const connection = require('./database/database');
 
 const categoriesController = require('./categories/CategoriesController'); //importando rotas arquivo controller
@@ -13,6 +14,13 @@ const User = require('./users/User'); // importando arquivo para sincronizar o b
 
 //configurando view engine
 app.set('view engine', 'ejs');
+
+//sessions
+
+app.use(session({
+  secret: 'qualquercoisa', cookie: {maxAge: 30000 }
+}))
+
 
 //configurando arquivos estaticos
 app.use(express.static('public'));
