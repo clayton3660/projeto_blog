@@ -49,24 +49,24 @@ router.post('/authenticate', (req, res) => {
   var email = req.body.email;
   var password = req.body.password;
 
-  User.findOne({where: {email:email}}).then(user => {
-    if(user != undefined) {
+  User.findOne({ where: { email: email } }).then((user) => {
+    if (user != undefined) {
       //Validar senha
-      var correct = bcrypt.compareSync(password, user.password)
+      var correct = bcrypt.compareSync(password, user.password);
 
-      if(correct){
+      if (correct) {
         req.session.user = {
           id: user.id,
           email: user.email,
-        }
-        res.json(req.session.user)
-      }else{
-        res.redirect("/login")  
+        };
+        res.redirect('admin/articles');
+      } else {
+        res.redirect('/login');
       }
-    }else {
-      res.redirect("/login")
+    } else {
+      res.redirect('/login');
     }
-  })
-})
+  });
+});
 
 module.exports = router;
