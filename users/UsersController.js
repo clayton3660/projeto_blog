@@ -69,4 +69,10 @@ router.post('/authenticate', (req, res) => {
   });
 });
 
+router.get('/logout', function(req, res) {
+  //req.session.destroy(); //verificar essa alternativa
+  req.session.user = undefined;
+  res.redirect('/')
+})
+
 module.exports = router;
